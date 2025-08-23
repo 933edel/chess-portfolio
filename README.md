@@ -1,3 +1,10 @@
+Chess Pawn by Jarlan Perez [CC-BY] via Poly Pizza
+Chess Rook by Jarlan Perez [CC-BY] via Poly Pizza
+Chess King by Jarlan Perez [CC-BY] via Poly Pizza
+Chess Knight by Jarlan Perez [CC-BY] via Poly Pizza
+Chess Queen by Jarlan Perez [CC-BY] via Poly Pizza
+Chess Bishop by Jarlan Perez [CC-BY] via Poly Pizza
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
