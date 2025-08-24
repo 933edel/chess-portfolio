@@ -29,7 +29,7 @@ const games = [
     activePieceTypes: ["king", "queen", "bishop", "knight"],
   },
   {
-    name: "Fischer's Game of the Century",
+    name: "Game of the Century",
     fen: "r3r1k1/pp3pbp/1qp1b1p1/2B5/2BP4/Q1n2N2/P4PPP/3R1K2 w - - 4 18",
     highlightColor: "black",
     activePieceTypes: ["king", "queen", "bishop", "knight"],
