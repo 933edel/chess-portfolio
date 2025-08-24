@@ -172,9 +172,6 @@ function ChessPiece({ piece, isActive, isSelectable, onClick, section }) {
       let emissiveIntensity = 0;
       if (isActive) {
         emissiveIntensity = 0.6;
-      } else if (isSelectable) {
-        // Change this line to set a static emissive intensity
-        emissiveIntensity = 0.25; // You can adjust this value as needed
       }
       mesh.material.emissive.set("#55ccff");
       mesh.material.emissiveIntensity = emissiveIntensity;
