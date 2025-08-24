@@ -29,6 +29,7 @@ const sectionAssignments = {
 };
 
 // Glow cylinder
+// Glow cylinder
 function GlowCylinder({ pulse }) {
   const matRef = useRef();
 
@@ -102,8 +103,8 @@ function Sparkle({ delay = 0, offset = [0, 0], phaseOffset = 0 }) {
 
   return (
     <mesh ref={ref} position={[offset[0], 0, offset[1]]}>
-      <sphereGeometry args={[0.025, 8, 8]} /> {/* smaller sparkle */}
-      <meshBasicMaterial color="#ffd700" transparent opacity={1} />
+            <sphereGeometry args={[0.025, 8, 8]} /> {/* smaller sparkle */}
+            <meshBasicMaterial color="#ffd700" transparent opacity={1} />   {" "}
     </mesh>
   );
 }
@@ -114,6 +115,7 @@ function SparkleStream({ phaseOffset = 0 }) {
   const angles = [0, (2 * Math.PI) / 3, (4 * Math.PI) / 3]; // 3 vertices of triangle
   return (
     <>
+           {" "}
       {angles.map((a, i) => (
         <Sparkle
           key={i}
@@ -122,6 +124,7 @@ function SparkleStream({ phaseOffset = 0 }) {
           phaseOffset={phaseOffset}
         />
       ))}
+         {" "}
     </>
   );
 }
@@ -137,9 +140,8 @@ function ChessPiece({ piece, isActive, isSelectable, onClick, section }) {
   useCursor(hovered && !!section);
 
   const groupPosition = [piece.x, 0, piece.z];
-  const pieceOffsetY = pieceOffsets[piece.type] ?? 0.7;
+  const pieceOffsetY = pieceOffsets[piece.type] ?? 0.7; // Unique random offset for sparkle asynchronicity
 
-  // Unique random offset for sparkle asynchronicity
   const phaseOffset = useMemo(() => Math.random() * 10, []);
 
   const clonedScene = useMemo(() => {
@@ -158,7 +160,7 @@ function ChessPiece({ piece, isActive, isSelectable, onClick, section }) {
   }, [scene, piece.color]);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime(); // The vertical movement is dependent on the `pulse` value
     pulse.current = (Math.sin(t * 6) + 1) / 2;
 
     if (primitiveRef.current) {
@@ -171,7 +173,8 @@ function ChessPiece({ piece, isActive, isSelectable, onClick, section }) {
       if (isActive) {
         emissiveIntensity = 0.6;
       } else if (isSelectable) {
-        emissiveIntensity = 0.15 + pulse.current * 0.1;
+        // Change this line to set a static emissive intensity
+        emissiveIntensity = 0.25; // You can adjust this value as needed
       }
       mesh.material.emissive.set("#55ccff");
       mesh.material.emissiveIntensity = emissiveIntensity;
@@ -185,20 +188,22 @@ function ChessPiece({ piece, isActive, isSelectable, onClick, section }) {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
+           {" "}
       <Suspense fallback={null}>
+               {" "}
         <primitive
           ref={primitiveRef}
           object={clonedScene}
           scale={5.0}
           rotation={[0, Math.PI, 0]}
         />
+             {" "}
       </Suspense>
-
-      {/* Cylinder only when active */}
-      {isActive && <GlowCylinder pulse={pulse.current} />}
-
-      {/* Sparkle streams only when selectable but not active */}
+            {/* Cylinder only when active */}     {" "}
+      {isActive && <GlowCylinder pulse={pulse.current} />}     {" "}
+      {/* Sparkle streams only when selectable but not active */}     {" "}
       {isSelectable && !isActive && <SparkleStream phaseOffset={phaseOffset} />}
+         {" "}
     </group>
   );
 }
